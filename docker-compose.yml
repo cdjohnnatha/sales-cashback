@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  sales_cashback:
+    build: .
+    env_file:
+        - .env
+    container_name: sales_cashback_api
+    restart: unless-stopped
+    command: make dev
+    volumes:
+      - "./${DB_DUMPS_EXTERNAL_PATH}:${WORK_DIR_PATH}/db/dumps"
+    links:
+      - postgresdb
+
+  postgresdb:
+    image: postgres:${POSTGRES_IMAGE_VERSION}
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    volumes:
+      - sales_cashback_api_data:/var/lib/postgresql/data
+  swaggerui:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - "./public:/app"
+    ports:
+      - 8080:8080
+    environment:
+      - SWAGGER_JSON=/app/swagger.json
+volumes:
+    sales_cashback_api_data:
+        driver: local
