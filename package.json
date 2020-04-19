@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./api/config/bin/www",
-    "dev": "nodemon ./api/config/bin/www"
+    "dev": "nodemon ./api/config/bin/www",
+    "test": "./node_modules/mocha/bin/mocha ./test/**/* --exit"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,10 +15,13 @@
     "nodemon": "^2.0.3"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.2",
+    "mocha": "^7.1.1",
     "prettier": "^2.0.4"
   }
 }
