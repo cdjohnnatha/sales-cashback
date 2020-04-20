@@ -1,0 +1,21 @@
+swagger: "2.0"
+info:
+  description: "This is a swagger documentation for sales-cashback. For use any route, you must authenticate"
+  version: "1.0.0"
+  title: "Swagger sales-cashback"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/api/"
+tags:
+  - name: "Resellers"
+    description: "Operations about resellers"
+schemes:
+  - "http"
+securityDefinitions:
+  auth:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:

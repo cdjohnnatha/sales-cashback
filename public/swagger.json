@@ -1,0 +1,91 @@
+swagger: "2.0"
+info:
+  description: "This is a swagger documentation for sales-cashback. For use any route, you must authenticate"
+  version: "1.0.0"
+  title: "Swagger sales-cashback"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/api/"
+tags:
+  - name: "Resellers"
+    description: "Operations about resellers"
+schemes:
+  - "http"
+securityDefinitions:
+  auth:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /v1/resellers:
+    post:
+      tags:
+      - "Resellers"
+      security:
+      - auth: []
+      summary: "Create reseller"
+      operationId: "createReseller"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created reseller object"
+        required: true
+        schema:
+          $ref: "#/definitions/ResellerInput"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResellerModel"
+        400:
+          description: "Bad Request"
+definitions:  
+  Reseller:
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      first_name:
+        type: "string"
+      last_name:
+        type: "string"
+      cpf:
+        type: "string"
+      created_at:
+        type: "string"
+      updated_at:
+        type: "string"
+    type: object
+  ResellerModel:
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      first_name:
+        type: "string"
+      last_name:
+        type: "string"
+      cpf:
+        type: "string"
+      created_at:
+        type: "string"
+      updated_at:
+        type: "string"
+      deleted_at:
+        type: "string"
+    type: object
+  ResellerInput:
+    properties:
+      first_name:
+        type: "string"
+      last_name:
+        type: "string"
+      cpf:
+        type: "string"
+        minValue: 11
+        maxValue: 14
+    type: object

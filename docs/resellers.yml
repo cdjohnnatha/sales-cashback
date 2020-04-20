@@ -1,0 +1,24 @@
+  /v1/resellers:
+    post:
+      tags:
+      - "Resellers"
+      security:
+      - auth: []
+      summary: "Create reseller"
+      operationId: "createReseller"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created reseller object"
+        required: true
+        schema:
+          $ref: "#/definitions/ResellerInput"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ResellerModel"
+        400:
+          description: "Bad Request"

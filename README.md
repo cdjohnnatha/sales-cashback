@@ -13,8 +13,9 @@
     2. [Makefile](#Makefile)
     3. [Docker](#Docker)
 4. [Usage](#Usage)
-5. [Tests](#Tests)
-6. [License](#License)
+5. [Swagger](#Swagger)
+6. [Tests](#Tests)
+7. [License](#License)
 
 
 ## 1. <a name='Intro'></a>Intro
@@ -80,6 +81,39 @@ All this cases are related to a total amount from a period of time.
 ```
 
 ## 4. 📖 <a name='Usage'></a>Usage
+
+
+## 5. 📄 <a name='Swagger'></a>Swagger
+
+All the endpoints has a documentation by swagger which can also be used as an test interface.
+
+**OBS: Swagger ui is only available using docker for this application.**
+
+* You must run the application together with swagger.
+
+To Use Swagger-ui you has to follow the stepps bellow:
+
+### 5.1 Build swagger
+
+It has the commands at a Makefile which runs a container with the Swagger-Ui image at **localhost:8085**.
+
+```
+  make swaggerui
+```
+
+### 5.2 Generate swagger.json
+
+The **swagger.json** is used as a documentation file which it is splited at docs folder. To create this file just run:
+
+```
+  npm run swagger-json
+```
+
+### 5.3 Demo
+
+If everything goes fine you can access **localhost:8085**
+
+![picture](public/images/swagger.png)
 
 
 ## 5. 📄 <a name='Tests'></a>Tests
