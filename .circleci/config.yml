@@ -10,8 +10,18 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-            - run: npm test
+            - run: mkdir ~/junit
+            - run:
+                command: mocha test --reporter mocha-junit-reporter
+                environment:
+                  MOCHA_FILE: ~/junit/test-results.xml
+                when: always
+            - store_test_results:
+                path: ~/junit
+            - store_artifacts:
+                path: ~/junit
+
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  build-and-test:
+    jobs:
+      - build-and-test
