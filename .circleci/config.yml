@@ -12,12 +12,6 @@ jobs:
             - run: npm install
             - run: npm test
             - run: npm run coverage
-            - store_artifacts: # Save tests results as artifacts
-              path: test-results.xml
-              prefix: tests
-            - store_artifacts: # Save coverage reports as artifacts
-              path: coverage
-              prefix: coverage
 workflows:
   build-and-test:
     jobs:
