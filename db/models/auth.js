@@ -30,5 +30,9 @@ module.exports = (db) => {
     return false;
   };
 
+  Auth.associate = ({ Auth: auth, Reseller }) => {
+    auth.hasOne(Reseller);
+  };
+
   return Auth;
 };

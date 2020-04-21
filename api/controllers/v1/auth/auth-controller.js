@@ -1,8 +1,8 @@
 const { houstonClientErrors } = require('houston-errors');
 const { authEmailSchema } = require('./auth-controller-schema');
-const { Auth } = require('../../../../db/models');
+const { Auth, Reseller } = require('../../../../db/models');
 const logger = require('../../../config/logger');
-const { generateJWT } = require('../../../helpers/jwt-generator');
+const { generateJWT } = require('../../../helpers/token-helpers');
 const { BAD_REQUEST } = houstonClientErrors;
 
 const authEmailProvider = async ({ body }, response) => {
@@ -14,9 +14,16 @@ const authEmailProvider = async ({ body }, response) => {
         const auth = await Auth.findOne({
           where: { email: body.email },
           attributes: ['id'],
+          include: [
+            {
+              model: Reseller,
+              attributes: ['id'],
+            }
+          ],
           raw: true
         });
-        const jwt = await generateJWT({ reseller_id: auth.id });
+        logger.systemLogLevel({ meta: { auth, function: 'authEmailProvider' } });
+        const jwt = await generateJWT({ reseller_id: auth['Reseller.id'] });
         response.status(200).send(jwt);
       } else {
         response.status(BAD_REQUEST.code).send('Invalid email or password');

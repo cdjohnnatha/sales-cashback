@@ -26,8 +26,8 @@ module.exports = (db) => {
 
     return params;
   };
-  Reseller.associate = ({ Auth }) => {
-    Reseller.belongsTo(Auth);
+  Reseller.associate = ({ Auth, Reseller: reseller }) => {
+    reseller.belongsTo(Auth, { foreignKey: 'auth_id', });
   };
 
   return Reseller;

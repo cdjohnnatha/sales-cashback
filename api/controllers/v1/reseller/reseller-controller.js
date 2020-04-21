@@ -18,6 +18,26 @@ const createReseller = async ({ body }, response) => {
   }
 };
 
+const getReseller = async ({ meta }, response) => {
+  try {
+    const reseller = await Reseller.findByPk(meta.reseller_id, {
+      attributes: ['id', 'first_name', 'last_name', 'cpf'],
+      include: [{ model: Auth, attributes: ['email'] }],
+    });
+    logger.systemLogLevel({
+      meta: {
+        function: 'getReseller',
+        reseller,
+      },
+    });
+    response.status(200).send({ reseller });
+  } catch (error) {
+    logger.systemLogLevel({ error, level: 'error' });
+    response.status(BAD_REQUEST.code).send(error);
+  }
+};
+
 module.exports = {
   createReseller,
+  getReseller,
 };
