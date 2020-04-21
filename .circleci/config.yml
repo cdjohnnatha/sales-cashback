@@ -2,6 +2,15 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
+  build:
+    docker:
+      postgresdb:
+        image: postgres:12.2
+        restart: unless-stopped
+        environment:
+          - POSTGRES_DB=sales_cashback_test
+          - POSTGRES_USER=sales_cashback_test
+          - POSTGRES_PASSWORD=sales_cashback_test
   build-and-test:
     executor:
       name: node/default

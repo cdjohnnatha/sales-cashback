@@ -9,9 +9,9 @@ const {
 
 
 module.exports = {
-  username: process.env.DB_USER || 'sales_cashback',
-  password: process.env.DB_PASS || 's4l3s',
-  database: process.env.DB_NAME || 'sales_cashback',
+  username: process.env.DB_USER || 'sales_cashback_test',
+  password: process.env.DB_PASS || 'sales_cashback_test',
+  database: process.env.DB_NAME || 'sales_cashback_test',
   host: process.env.DB_HOST || '127.0.0.1',
   dialect: 'postgres',
 };
