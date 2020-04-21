@@ -1,32 +1,31 @@
   
-  Reseller:
+  Token:
+    properties:
+      jwt:
+        type: "string"
+    type: object
+  Auth:
     properties:
       id:
         type: "integer"
         format: "int64"
-      first_name:
-        type: "string"
-      last_name:
-        type: "string"
-      cpf:
-        type: "string"
       email:
+        type: "string"
+      password:
         type: "string"
       created_at:
         type: "string"
       updated_at:
         type: "string"
     type: object
-  ResellerModel:
+  AuthModel:
     properties:
       id:
         type: "integer"
         format: "int64"
-      first_name:
+      email:
         type: "string"
-      last_name:
-        type: "string"
-      cpf:
+      password:
         type: "string"
       created_at:
         type: "string"
@@ -35,18 +34,14 @@
       deleted_at:
         type: "string"
     type: object
-  ResellerInput:
+  AuthInput:
     properties:
-      first_name:
+      email:
         type: "string"
-      last_name:
+        format: email
+        example: "claudio@example.com"
+      password:
         type: "string"
-      cpf:
-        type: "string"
-        minValue: 11
-        maxValue: 14
-      auth:
-        properties:
-          schema:
-            $ref: "#/definitions/AuthInput"
+        minValue: 8
+        example: "123456789"
     type: object

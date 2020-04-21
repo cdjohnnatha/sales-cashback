@@ -9,17 +9,22 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install
-            - run: mkdir ~/junit
             - run:
-                command: mocha test --reporter mocha-junit-reporter
-                environment:
-                  MOCHA_FILE: ~/junit/test-results.xml
-                when: always
-            - store_test_results:
-                path: ~/junit
-            - store_artifacts:
-                path: ~/junit
+              name: Install dependencies
+              command: npm install
+            - run:    
+              name: Run mocha tests
+              command: npm test
+            - run:
+              name: Generate coverage report
+              command: npm run coverage
+            - store_artifacts: # Save tests results as artifacts
+              path: test-results.xml
+              prefix: tests
+            - store_artifacts: # Save coverage reports as artifacts
+              path: coverage
+              prefix: coverage
+            
 
 workflows:
   build-and-test:

@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./api/config/bin/www",
-    "dev": "nodemon ./api/config/bin/www",
+    "start": "node -r dotenv/config ./api/config/bin/www",
+    "dev": "nodemon -r dotenv/config ./api/config/bin/www",
     "test": "./node_modules/mocha/bin/mocha ./test/**/* --exit",
-    "test-coverage": "./node_modules/nyc/bin/nyc.js --reporter=html --reporter=text ./node_modules/mocha/bin/mocha ./test/**/* --exit",
+    "coverage": "./node_modules/nyc/bin/nyc.js ---reporter=lcov --reporter=text ./node_modules/mocha/bin/mocha ./test/api/v1/**.*.js --exit",
+    "test-coverage": "./node_modules/nyc/bin/nyc.js --reporter=html --reporter=text ./node_modules/mocha/bin/mocha ./test/api/v1/reseller-controller.test.js --exit",
     "swagger-json": "./node_modules/gulp/bin/gulp.js swagger"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "express": "~4.16.1",
     "gulp": "^4.0.2",
     "houston-errors": "^1.1.0",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.3",
     "pg": "^8.0.2",

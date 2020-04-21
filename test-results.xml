@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.0470" tests="9" failures="4">
+  <testsuite name="Root Suite" timestamp="2020-04-21T01:20:09" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Auth-controller" timestamp="2020-04-21T01:20:09" tests="0" file="/home/claudio/Documents/workspace/sales-cashback/test/api/v1/auth-controller.test.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Auth a reseller" timestamp="2020-04-21T01:20:09" tests="0" file="/home/claudio/Documents/workspace/sales-cashback/test/api/v1/auth-controller.test.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="with success params" timestamp="2020-04-21T01:20:09" tests="1" file="/home/claudio/Documents/workspace/sales-cashback/test/api/v1/auth-controller.test.js" time="0.0020" failures="1">
+    <testcase name="Auth-controller Auth a reseller with success params auth with existent reseller with right params should return a jwt" time="0.0020" classname="auth with existent reseller with right params should return a jwt">
+      <failure message="resellerParams is not defined" type="ReferenceError"><![CDATA[ReferenceError: resellerParams is not defined
+    at Context.<anonymous> (test/api/v1/auth-controller.test.js:38:71)
+    at processImmediate (internal/timers.js:456:21)]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Reseller-controller" timestamp="2020-04-21T01:20:09" tests="0" file="/home/claudio/Documents/workspace/sales-cashback/test/api/v1/reseller-controller.test.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Register reseller" timestamp="2020-04-21T01:20:09" tests="0" file="/home/claudio/Documents/workspace/sales-cashback/test/api/v1/reseller-controller.test.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="with success params" timestamp="2020-04-21T01:20:09" tests="2" file="/home/claudio/Documents/workspace/sales-cashback/test/api/v1/reseller-controller.test.js" time="0.0350" failures="2">
+    <testcase name="Reseller-controller Register reseller with success params create reseller with right params should return a created reseller" time="0.0310" classname="create reseller with right params should return a created reseller">
+      <failure message="expected 400 to equal 201" type="AssertionError"><![CDATA[AssertionError: expected 400 to equal 201
+    at Context.<anonymous> (test/api/v1/reseller-controller.test.js:31:40)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testcase>
+    <testcase name="Reseller-controller Register reseller with success params create reseller with special characters, should create but without them" time="0.0040" classname="create reseller with special characters, should create but without them">
+      <failure message="expected 400 to equal 201" type="AssertionError"><![CDATA[AssertionError: expected 400 to equal 201
+    at Context.<anonymous> (test/api/v1/reseller-controller.test.js:43:40)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="with wrong params" timestamp="2020-04-21T01:20:09" tests="3" file="/home/claudio/Documents/workspace/sales-cashback/test/api/v1/reseller-controller.test.js" time="0.0090" failures="0">
+    <testcase name="Reseller-controller Register reseller with wrong params create reseller without first_name, should return an error" time="0.0030" classname="create reseller without first_name, should return an error">
+    </testcase>
+    <testcase name="Reseller-controller Register reseller with wrong params create reseller without last_name, should return an error" time="0.0030" classname="create reseller without last_name, should return an error">
+    </testcase>
+    <testcase name="Reseller-controller Register reseller with wrong params create reseller without cpf, should return an error" time="0.0030" classname="create reseller without cpf, should return an error">
+    </testcase>
+  </testsuite>
+  <testsuite name="Create reseller for tests" timestamp="2020-04-21T01:20:09" tests="1" file="/home/claudio/Documents/workspace/sales-cashback/test/support/shared-examples/reseller-shared-examples.js" time="0.0010" failures="1">
+    <testcase name="Create reseller for tests should create a reseller" time="0.0010" classname="should create a reseller">
+      <failure message="model.save is not a function" type="TypeError"><![CDATA[TypeError: model.save is not a function
+    at DefaultAdapter._callee$ (node_modules/factory-girl/index.js:727:73)
+    at tryCatch (node_modules/regenerator-runtime/runtime.js:62:40)
+    at Generator.invoke [as _invoke] (node_modules/regenerator-runtime/runtime.js:296:22)
+    at Generator.prototype.<computed> [as next] (node_modules/regenerator-runtime/runtime.js:114:21)
+    at step (node_modules/babel-runtime/helpers/asyncToGenerator.js:17:30)
+    at /home/claudio/Documents/workspace/sales-cashback/node_modules/babel-runtime/helpers/asyncToGenerator.js:35:14
+    at new Promise (<anonymous>)
+    at new F (node_modules/core-js/library/modules/_export.js:36:28)
+    at DefaultAdapter.<anonymous> (node_modules/babel-runtime/helpers/asyncToGenerator.js:14:12)
+    at DefaultAdapter.save (node_modules/factory-girl/index.js:740:21)
+    at Factory._callee3$ (node_modules/factory-girl/index.js:195:59)
+    at tryCatch (node_modules/regenerator-runtime/runtime.js:62:40)
+    at Generator.invoke [as _invoke] (node_modules/regenerator-runtime/runtime.js:296:22)
+    at Generator.prototype.<computed> [as next] (node_modules/regenerator-runtime/runtime.js:114:21)
+    at step (node_modules/babel-runtime/helpers/asyncToGenerator.js:17:30)
+    at /home/claudio/Documents/workspace/sales-cashback/node_modules/babel-runtime/helpers/asyncToGenerator.js:28:13
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Removing user" timestamp="2020-04-21T01:20:09" tests="1" file="/home/claudio/Documents/workspace/sales-cashback/test/support/shared-examples/reseller-shared-examples.js" time="0.0000" failures="0">
+    <testcase name="Removing user should remove a role" time="0.0000" classname="should remove a role">
+    </testcase>
+  </testsuite>
+  <testsuite name="Removing a reseller" timestamp="2020-04-21T01:20:09" tests="1" file="/home/claudio/Documents/workspace/sales-cashback/test/support/shared-examples/reseller-shared-examples.js" time="0.0000" failures="0">
+    <testcase name="Removing a reseller should remove a reseller" time="0.0000" classname="should remove a reseller">
+    </testcase>
+  </testsuite>
+</testsuites>

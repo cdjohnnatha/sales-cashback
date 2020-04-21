@@ -1,0 +1,7 @@
+{
+  "timeout": 3000,
+  "extension": ["js"],
+  "ui": "bdd",
+  "watch-files": ["test/api/v1/**.*js"],
+  "watch-ignore": ["lib/vendor"]
+}

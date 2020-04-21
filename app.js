@@ -3,11 +3,10 @@ const express = require('express');
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-require('dotenv');
 const routes = require('./api/config/routes');
 
 const app = express();
+require('dotenv').config();
 
 app.use(cors());
 app.use(logger('dev'));

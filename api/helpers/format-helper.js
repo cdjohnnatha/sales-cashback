@@ -3,7 +3,6 @@ const { specialCharactersRegex, removeMoreThanOneSpaceBetweenWordsRegex } = requ
 
 const normalize = (value = null) => {
   if (!isParamEmpty(value)) {
-    console.log('[params]', value);
     return value
       .replace(specialCharactersRegex, '')
       .normalize('NFD')
@@ -15,13 +14,6 @@ const normalize = (value = null) => {
   return null;
 };
 
-const formatCpf = (cpf) => {
-  if (!isParamEmpty(cpf)) {
-    return normalize(cpf)
-  }
-};
-
 module.exports = {
   normalize,
-  formatCpf,
 };
