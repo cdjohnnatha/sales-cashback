@@ -36,6 +36,7 @@ describe('Reseller-controller', () => {
       it(`create reseller with right params should return a created reseller`, async () => {
         resellerParams.Auth = authParams;
         const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
+        console.log(response);
         expect(response.statusCode).to.equal(201);
         const { body } = response;
         shouldBehaveLikeReseller(body);
