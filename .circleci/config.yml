@@ -9,23 +9,15 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run:
-              name: Install dependencies
-              command: npm install
-            - run:    
-              name: Run mocha tests
-              command: npm test
-            - run:
-              name: Generate coverage report
-              command: npm run coverage
+            - run: npm install
+            - run: npm test
+            - run: npm run coverage
             - store_artifacts: # Save tests results as artifacts
               path: test-results.xml
               prefix: tests
             - store_artifacts: # Save coverage reports as artifacts
               path: coverage
               prefix: coverage
-            
-
 workflows:
   build-and-test:
     jobs:
