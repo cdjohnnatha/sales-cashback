@@ -91,36 +91,6 @@ definitions:
       jwt:
         type: "string"
     type: object
-  Auth:
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      email:
-        type: "string"
-      password:
-        type: "string"
-      created_at:
-        type: "string"
-      updated_at:
-        type: "string"
-    type: object
-  AuthModel:
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      email:
-        type: "string"
-      password:
-        type: "string"
-      created_at:
-        type: "string"
-      updated_at:
-        type: "string"
-      deleted_at:
-        type: "string"
-    type: object
   AuthInput:
     properties:
       email:
@@ -146,6 +116,8 @@ definitions:
         type: "string"
       email:
         type: "string"
+      password:
+        type: "string"
       created_at:
         type: "string"
       updated_at:
@@ -161,6 +133,10 @@ definitions:
       last_name:
         type: "string"
       cpf:
+        type: "string"
+      email:
+        type: "string"
+      password:
         type: "string"
       created_at:
         type: "string"
@@ -179,8 +155,9 @@ definitions:
         type: "string"
         minValue: 11
         maxValue: 14
-      auth:
-        properties:
-          schema:
-            $ref: "#/definitions/AuthInput"
+      email:
+        type: "string"
+        format: email
+      password:
+        type: "string"
     type: object

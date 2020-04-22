@@ -1,13 +1,5 @@
 require('dotenv');
 
-const {
-  DB_USER,
-  DB_PASS,
-  DB_NAME,
-  DB_HOST
-} = process.env;
-
-
 module.exports = {
   username: process.env.DB_USER || 'sales_cashback',
   password: process.env.DB_PASS || 's4l3s',

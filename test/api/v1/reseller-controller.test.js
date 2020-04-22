@@ -92,7 +92,6 @@ describe('Resellers-controller', () => {
             .request(app)
             .get(`${resellerBaseRoute}profile`)
             .set('Authorization', bearerToken);
-            console.log('[response]', response.body);
           expect(response.statusCode).to.eq(200);
         });
       });
@@ -101,7 +100,7 @@ describe('Resellers-controller', () => {
           const response = await chai
             .request(app)
             .get(`${resellerBaseRoute}profile`);
-          // expect(response.statusCode).to.eq(401);
+          expect(response.statusCode).to.eq(401);
         });
       });
   });

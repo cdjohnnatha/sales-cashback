@@ -1,6 +1,6 @@
 const { houstonServerErrors, apollo13 } = require('houston-errors');
 const { decodeToken, getBearerTokenFromHeader } = require('../../helpers/token-helpers');
-const { Reseller } = require('../../../db/models');
+const { Resellers } = require('../../../db/models');
 
 const logger = require('../logger');
 /**
