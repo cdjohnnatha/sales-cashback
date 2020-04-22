@@ -1,5 +1,5 @@
 const express = require('express');
-const resellerRoutes = require('./reseller-routes');
+const resellerRoutes = require('./resellers/index');
 const authRoutes = require('./auth-routes');
 const router = express.Router();
 
