@@ -33,6 +33,12 @@ module.exports = {
     type: STRING(11),
     unique: true
   },
+  created_at: {
+    type: DATE,
+  },
+  updated_at: {
+    type: DATE,
+  },
   deleted_at: {
     allowNull: true,
     type: DATE,

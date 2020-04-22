@@ -1,7 +1,6 @@
 const { INTEGER, DOUBLE, DATE, ENUM } = require('sequelize');
-const createUpdateTimestampDataTypes = require('../create-update-timestamp-data-types');
 
-module.exports = {
+module.exports = ({
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -15,6 +14,8 @@ module.exports = {
   total_amount: {
     type: DOUBLE,
     allowNull: false,
+    defaultValue: 0.00,
+    validate: { min: 0.00 }
   },
   status: {
     type: ENUM,
@@ -22,9 +23,14 @@ module.exports = {
     allowNull: false,
     defaultValue: 'OPEN'
   },
-  ...createUpdateTimestampDataTypes,
+  created_at: {
+    type: DATE,
+  },
+  updated_at: {
+    type: DATE,
+  },
   deleted_at: {
     allowNull: true,
     type: DATE
   }
-};
+});

@@ -1,5 +1,4 @@
 const { INTEGER, DATE } = require('sequelize');
-const createUpdateTimestampDataTypes = require('./create-update-timestamp-data-types');
 
 module.exports = {
   id: {
@@ -20,7 +19,12 @@ module.exports = {
     type: INTEGER,
     allowNull: false,
   },
-  ...createUpdateTimestampDataTypes,
+  created_at: {
+    type: DATE,
+  },
+  updated_at: {
+    type: DATE,
+  },
   deleted_at: {
     allowNull: true,
     type: DATE,

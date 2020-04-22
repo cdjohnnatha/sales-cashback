@@ -1,10 +1,11 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const product = sequelize.define('product', {
-    name: DataTypes.STRING
-  }, {});
-  product.associate = function(models) {
-    // associations can be defined here
-  };
-  return product;
+const productsDataTypes = require('./data-types/products-data-types');
+const ModelSettings = require('../config/model-settings');
+
+module.exports = (db) => {
+  const CartItem = db.define('Products', productsDataTypes, {
+    ...ModelSettings,
+    tableName: 'products',
+  });
+  CartItem.associate = () => {};
+  return CartItem;
 };
