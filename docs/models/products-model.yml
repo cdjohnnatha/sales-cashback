@@ -1,0 +1,39 @@
+  
+  Product:
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      qty_available:
+        type: "integer"
+      price:
+        type: "number"
+      created_at:
+        type: "string"
+      updated_at:
+        type: "string"
+      deleted_at:
+        type: "string"
+    type: object
+  ProductInput:
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+      qty_available:
+        type: "integer"
+      price:
+        type: "number"
+    type: object
+  ProductList:
+    properties:
+      products:
+        type: "array"
+        items:
+          $ref: "#/definitions/Products"
+    type: object
