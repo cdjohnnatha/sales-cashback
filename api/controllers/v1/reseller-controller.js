@@ -1,7 +1,7 @@
 const { houstonClientErrors } = require('houston-errors');
-const { createResellerSchema } = require('./reseller-controller-schemas');
-const { Reseller, Auth } = require('../../../../db/models');
-const logger = require('../../../config/logger');
+const { createResellerSchema } = require('./schemas/reseller-schemas');
+const { Resellers } = require('../../../db/models');
+const logger = require('../../config/logger');
 
 const { BAD_REQUEST } = houstonClientErrors;
 
@@ -9,7 +9,8 @@ const createReseller = async ({ body }, response) => {
   try {
     const isParamsValid = await createResellerSchema.validate(body);
     if (isParamsValid) {
-      const reseller = await Reseller.create(body, { include: [{ model: Auth }] });
+      const reseller = await Resellers.create(body);
+      logger.systemLogLevel({ reseller: reseller.dataValues, function: 'createReseller', });
       response.status(201).send(reseller);
     }
   } catch (error) {
@@ -20,9 +21,9 @@ const createReseller = async ({ body }, response) => {
 
 const getReseller = async ({ meta }, response) => {
   try {
-    const reseller = await Reseller.findByPk(meta.reseller_id, {
-      attributes: ['id', 'first_name', 'last_name', 'cpf'],
-      include: [{ model: Auth, attributes: ['email'] }],
+    const reseller = await Resellers.findByPk(meta.reseller_id, {
+      attributes: ['id', 'first_name', 'last_name', 'cpf', 'email'],
+      raw: true,
     });
     logger.systemLogLevel({
       meta: {
@@ -30,7 +31,7 @@ const getReseller = async ({ meta }, response) => {
         reseller,
       },
     });
-    response.status(200).send({ reseller });
+    response.status(200).send({ ...reseller });
   } catch (error) {
     logger.systemLogLevel({ error, level: 'error' });
     response.status(BAD_REQUEST.code).send(error);
