@@ -1,5 +1,5 @@
-const { name, internet } = require('faker');
-const { Reseller } = require('../../db/models');
+const { name, internet, random } = require('faker');
+const { Resellers } = require('../../db/models');
 
 const hooks = {
   afterBuild: (model, _attrs) => {
@@ -10,17 +10,18 @@ const hooks = {
 };
 
 const ResellerFactory = (factory) => {
-  factory.define('Reseller', Reseller, buildAttributes => {
-    const attributes = {
+  factory.define(
+    'Resellers',
+    Resellers,
+    {
       first_name: () => name.firstName(),
       last_name: () => name.lastName(),
-      cpf: () => '00011100011',
-    };
-    if (buildAttributes.with_auth) {
-      attributes.Auth = factory.assoc('Auth', 'auth_id');
-    }
-    return attributes;
-  }, hooks);
+      cpf: () => random.number({ min: 00000000001, max: 99999999999 }).toString(),
+      email: () => internet.email(),
+      password: () => '123456789',
+    },
+    hooks
+  );
 };
 
 module.exports = ResellerFactory;
