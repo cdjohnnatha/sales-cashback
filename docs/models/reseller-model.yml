@@ -12,6 +12,8 @@
         type: "string"
       email:
         type: "string"
+      password:
+        type: "string"
       created_at:
         type: "string"
       updated_at:
@@ -27,6 +29,10 @@
       last_name:
         type: "string"
       cpf:
+        type: "string"
+      email:
+        type: "string"
+      password:
         type: "string"
       created_at:
         type: "string"
@@ -45,8 +51,9 @@
         type: "string"
         minValue: 11
         maxValue: 14
-      auth:
-        properties:
-          schema:
-            $ref: "#/definitions/AuthInput"
+      email:
+        type: "string"
+        format: email
+      password:
+        type: "string"
     type: object
