@@ -1,21 +1,23 @@
 const ResellerDataTypes = require('./data-types/reseller-data-types');
 const ModelSettings = require('../config/model-settings');
 const { normalize } = require('../../api/helpers/format-helper');
+const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
-  const Reseller = db.define('Reseller', ResellerDataTypes, {
+  const Reseller = db.define('Resellers', ResellerDataTypes, {
     ...ModelSettings,
-    tableName: 'reseller',
+    tableName: 'resellers',
     hooks: {
       beforeCreate: ({ dataValues }, _options) => {
         dataValues = Reseller.normalizeParams(dataValues);
+        dataValues.password = bcrypt.hashSync(dataValues.password, bcrypt.genSaltSync(10));
         return dataValues;
       },
-      beforeUpdate: ({ dataValues }, _options) => {
-        dataValues = Reseller.normalizeParams(dataValues);
+      afterCreate: ({ dataValues }, _options) => {
+        delete dataValues.password;
 
         return dataValues;
-      },
+      }
     },
   });
   Reseller.normalizeParams = (params) => {
@@ -26,9 +28,19 @@ module.exports = (db) => {
 
     return params;
   };
-  Reseller.associate = ({ Auth, Reseller: reseller }) => {
-    reseller.belongsTo(Auth, { foreignKey: 'auth_id', });
+  Reseller.isPasswordValid = async ({ email, password }) => {
+    const auth = await Reseller.findOne({
+      where: { email },
+      attributes: ['password'],
+      raw: true,
+    });
+    if (auth) {
+      return bcrypt.compare(password, auth.password);
+    }
+    return false;
   };
+
+  Reseller.associate = () => {};
 
   return Reseller;
 };

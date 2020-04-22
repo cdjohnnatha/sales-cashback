@@ -19,6 +19,15 @@ module.exports = {
     allowNull: false,
     type: STRING(70),
   },
+  email: {
+    type: STRING(100),
+    allowNull: false,
+    unique: true,
+  },
+  password: {
+    type: STRING,
+    allowNull: false,
+  },
   cpf: {
     allowNull: false,
     type: STRING(11),
