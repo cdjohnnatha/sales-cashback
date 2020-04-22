@@ -25,7 +25,8 @@ describe('Resellers-controller', () => {
   });
   describe('Register reseller', () => {
     beforeEach(async () => {
-      resellerParams = await Factory.build('Resellers');
+      ({ dataValues: resellerParams } = await Factory.build('Resellers'));
+      delete resellerParams.id;
     });
 
     describe('with success params', () => {
@@ -47,61 +48,59 @@ describe('Resellers-controller', () => {
         expect(body.last_name).to.be.eq(lastName);
       });
     });
-      describe('with wrong params', () => {
-        it(`create reseller without first_name, should return an error`, async () => {
-          delete resellerParams.first_name;
-          const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
-          expect(response.statusCode).to.equal(BAD_REQUEST.code);
-        });
-        it(`create reseller without last_name, should return an error`, async () => {
-          delete resellerParams.last_name;
-          const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
-          expect(response.statusCode).to.equal(BAD_REQUEST.code);
-        });
-        it(`create reseller without cpf, should return an error`, async () => {
-          const resellerParams = await Factory.build('Resellers');
-          delete resellerParams.cpf;
-          const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
-          expect(response.statusCode).to.equal(BAD_REQUEST.code);
-        });
-        it(`create reseller without email, should return an error`, async () => {
-          delete resellerParams.email;
-          const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
-          expect(response.statusCode).to.equal(BAD_REQUEST.code);
-        });
-        it(`create reseller without password, should return an error`, async () => {
-          delete resellerParams.password;
-          const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
-          expect(response.statusCode).to.equal(BAD_REQUEST.code);
-        });
+    describe('with wrong params', () => {
+      it(`create reseller without first_name, should return an error`, async () => {
+        delete resellerParams.first_name;
+        const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
+        expect(response.statusCode).to.equal(BAD_REQUEST.code);
+      });
+      it(`create reseller without last_name, should return an error`, async () => {
+        delete resellerParams.last_name;
+        const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
+        expect(response.statusCode).to.equal(BAD_REQUEST.code);
+      });
+      it(`create reseller without cpf, should return an error`, async () => {
+        const resellerParams = await Factory.build('Resellers');
+        delete resellerParams.dataValues.cpf;
+        const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams.dataValues);
+        expect(response.statusCode).to.equal(BAD_REQUEST.code);
+      });
+      it(`create reseller without email, should return an error`, async () => {
+        delete resellerParams.email;
+        const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
+        expect(response.statusCode).to.equal(BAD_REQUEST.code);
+      });
+      it(`create reseller without password, should return an error`, async () => {
+        delete resellerParams.password;
+        const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
+        expect(response.statusCode).to.equal(BAD_REQUEST.code);
       });
     });
+  });
 
-    describe('GET reseller', () => {
-      before(async () => {
-        resellerParams = await Factory.build('Resellers');
-        const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
-        expect(response.statusCode).to.eq(201);
-        reseller = response.body;
+  describe('GET reseller', () => {
+    before(async () => {
+      ({ dataValues: resellerParams } = await Factory.build('Resellers'));
+      const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
+      expect(response.statusCode).to.eq(201);
+      reseller = response.body;
+    });
+    describe('Authorized reseller', () => {
+      it('get profile with authorized token should return a reseller info', async () => {
+        const bearerToken = await authenticateUser({ app, chai, email: reseller.email });
+        expect(bearerToken).to.include('Bearer ');
+        const response = await chai
+          .request(app)
+          .get(`${resellerBaseRoute}profile`)
+          .set('Authorization', bearerToken);
+        expect(response.statusCode).to.eq(200);
       });
-      describe('Authorized reseller', () => {
-        it('get profile with authorized token should return a reseller info', async () => {
-          const bearerToken = await authenticateUser({ app, chai, email: reseller.email });
-          expect(bearerToken).to.include('Bearer ');
-          const response = await chai
-            .request(app)
-            .get(`${resellerBaseRoute}profile`)
-            .set('Authorization', bearerToken);
-          expect(response.statusCode).to.eq(200);
-        });
+    });
+    describe('Unauthorized reseller', () => {
+      it('get profile without token should return 401', async () => {
+        const response = await chai.request(app).get(`${resellerBaseRoute}profile`);
+        expect(response.statusCode).to.eq(401);
       });
-      describe('Unauthorized reseller', () => {
-        it('get profile without token should return 401', async () => {
-          const response = await chai
-            .request(app)
-            .get(`${resellerBaseRoute}profile`);
-          expect(response.statusCode).to.eq(401);
-        });
-      });
+    });
   });
 });

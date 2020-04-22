@@ -4,7 +4,6 @@ const { Resellers } = require('../../db/models');
 const hooks = {
   afterBuild: (model, _attrs) => {
     const { dataValues } = model;
-    delete dataValues.id;
     return dataValues;
   },
 };
@@ -20,7 +19,7 @@ const ResellerFactory = (factory) => {
       email: () => internet.email(),
       password: () => '123456789',
     },
-    hooks
+    // hooks
   );
 };
 

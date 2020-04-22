@@ -13,7 +13,6 @@ module.exports = {
         updated_at: new Date(),
       });
     }
-    console.log(productList);
     return queryInterface.bulkInsert('products', productList, {});
   },
 
