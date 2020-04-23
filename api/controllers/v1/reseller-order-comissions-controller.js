@@ -1,13 +1,13 @@
 const { houstonClientErrors } = require('houston-errors');
-const { addProductsInputSchema } = require('./schemas/order-schemas');
-const { Carts, CartItems } = require('../../../db/models');
+const { createOrderInputSchema } = require('./schemas/reseller-order-comission-schemas');
+const { ResellerOrderComissions, ComissionRules } = require('../../../db/models');
 const logger = require('../../config/logger');
 
 const { BAD_REQUEST } = houstonClientErrors;
 
-const addProducts = async ({ body, reseller_id }, response) => {
+const createOrderComission = async ({ body, reseller_id }, response) => {
   try {
-    const isParamsValid = await addProductsInputSchema.validate(body);
+    const isParamsValid = await createOrderInputSchema.validate(body);
     if (isParamsValid) {
       const cart = Carts.findOrCreate({
         where: {
@@ -31,5 +31,5 @@ const addProducts = async ({ body, reseller_id }, response) => {
 };
 
 module.exports = {
-  addProducts,
+  createOrderComission,
 };

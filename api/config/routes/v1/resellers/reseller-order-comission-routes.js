@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { addProducts } = require('../../../../controllers/v1/reseller-carts-controller');
+const { createOrderComission } = require('../../../../controllers/v1/reseller-order-comissions-controller');
 
 router.post('/add-products', addProducts);
 
