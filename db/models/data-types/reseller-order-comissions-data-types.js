@@ -15,6 +15,10 @@ module.exports = {
     allowNull: false,
     type: INTEGER,
   },
+  shopping_code: {
+    allowNull: false,
+    type: INTEGER,
+  },
   description: {
     type: TEXT,
     allowNull: false,
