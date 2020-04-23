@@ -1,4 +1,4 @@
-const { INTEGER, DATE } = require('sequelize');
+const { INTEGER, ENUM, DATE, DOUBLE, TEXT } = require('sequelize');
 
 module.exports = {
   id: {
@@ -7,17 +7,23 @@ module.exports = {
     primaryKey: true,
     type: INTEGER,
   },
-  order_id: {
+  reseller_id: {
     allowNull: false,
     type: INTEGER,
   },
-  product_id: {
+  comission_rules_id: {
     allowNull: false,
     type: INTEGER,
   },
-  qty_products: {
-    type: INTEGER,
+  description: {
+    type: TEXT,
     allowNull: false,
+  },
+  order_statuses: {
+    type: ENUM,
+    values: ['WAITING_APPROVAL', 'APPROVED'],
+    allowNull: false,
+    defaultValue: 'WAITING_APPROVAL'
   },
   created_at: {
     type: DATE,
