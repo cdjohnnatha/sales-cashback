@@ -10,6 +10,7 @@ jobs:
           - POSTGRES_USER=sales_cashback
           - POSTGRES_PASSWORD=sales_cashback
       - image: circleci/node:13.13.0
+  build-and-test:
     steps:
       - checkout
       - node/with-cache:
@@ -23,3 +24,4 @@ workflows:
     jobs:
       - build-and-test
 
+      
