@@ -35,10 +35,6 @@ module.exports = {
     allowNull: false,
     type: STRING(11),
     unique: true,
-    validate: {
-      min: 11,
-      max: 11,
-    }
   },
   createdAt: {
     type: DATE,
