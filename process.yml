@@ -1,0 +1,51 @@
+# Orb 'circleci/node@1.1.6' resolved to 'circleci/node@1.1.6'
+version: 2
+jobs:
+  build:
+    docker:
+    - image: circleci/postgres:12.2
+      environment:
+      - POSTGRES_DB=sales_cashback
+      - POSTGRES_USER=sales_cashback
+      - POSTGRES_PASSWORD=sales_cashback
+    - image: circleci/node:13.13.0
+    steps:
+    - checkout
+    - run:
+        command: npm install
+    - run:
+        command: npm build-database
+    - run:
+        command: npm test
+    - run:
+        command: npm run coverage
+workflows:
+  TestBuildWorkflow:
+    jobs:
+    - build
+  version: 2
+
+# Original config.yml file:
+# version: 2.1
+# orbs:
+#   node: circleci/node@1.1.6
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/postgres:12.2
+#         environment:
+#           - POSTGRES_DB=sales_cashback
+#           - POSTGRES_USER=sales_cashback
+#           - POSTGRES_PASSWORD=sales_cashback
+#       - image: circleci/node:13.13.0
+#     steps:
+#       - checkout
+#       - run: npm install
+#       - run: npm build-database
+#       - run: npm test
+#       - run: npm run coverage
+# workflows:
+#   TestBuildWorkflow:
+#     jobs:
+#     - build
+#   version: 2.1

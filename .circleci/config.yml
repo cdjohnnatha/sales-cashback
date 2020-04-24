@@ -1,22 +1,30 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1.6
 jobs:
   build:
     docker:
+      - image: circleci/node:13.13.0
+        environment:
+          DB_HOST: "localhost"
+          TOKEN_EXPIRATION_DAYS: 1
+          TOKEN_SECRET: test-token
+          DB_NAME: sales_cashback
+          DB_USER: sales_cashback
+          DB_PASS: sales_cashback
+          DB_PORT: 5432
       - image: circleci/postgres:12.2
         environment:
           - POSTGRES_DB=sales_cashback
           - POSTGRES_USER=sales_cashback
           - POSTGRES_PASSWORD=sales_cashback
-      - image: circleci/node:13.13.0
     steps:
       - checkout
-      - run: 'sudo npm install -g npm@latest'
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm build-database
-            - run: npm test
-            - run: npm run coverage
-      
+      - run: npm install
+      - run: npm run database-migration
+      - run: npm run coverage
+      - run: npm test
+      # - run: npm run database-drop
+workflows:
+  TestBuildWorkflow:
+    jobs:
+    - build
+  version: 2.1

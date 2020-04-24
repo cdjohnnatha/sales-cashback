@@ -15,7 +15,7 @@ const ResellerFactory = (factory) => {
     {
       first_name: () => name.firstName(),
       last_name: () => name.lastName(),
-      cpf: () => random.number({ min: 00000000001, max: 99999999999 }).toString(),
+      cpf: () => random.number({ min: 10000000000, max: 99999999999 }).toString(),
       email: () => internet.email(),
       password: () => '123456789',
     },
