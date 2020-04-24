@@ -18,7 +18,6 @@ const resellerBaseRoute = `${baseApiRoute}resellers/`;
 
 let resellerParams = null;
 let reseller = null;
-
 describe('Resellers-controller', () => {
   after(async () => {
     await Factory.cleanUp('Resellers');
@@ -98,6 +97,33 @@ describe('Resellers-controller', () => {
     });
     describe('Unauthorized reseller', () => {
       it('get profile without token should return 401', async () => {
+        const response = await chai.request(app).get(`${resellerBaseRoute}profile`);
+        expect(response.statusCode).to.eq(401);
+      });
+    });
+  });
+
+  describe('GET reseller/accumulated-cashback', () => {
+    before(async () => {
+      ({ dataValues: resellerParams } = await Factory.build('Resellers'));
+      const response = await chai.request(app).post(resellerBaseRoute).send(resellerParams);
+      expect(response.statusCode).to.eq(201);
+      reseller = response.body;
+    });
+    describe('Authorized reseller', () => {
+      it('get accumulated cashback credit with authorized token should return a credit amount', async () => {
+        const bearerToken = await authenticateUser({ app, chai, email: reseller.email });
+        expect(bearerToken).to.include('Bearer ');
+        const response = await chai
+          .request(app)
+          .get(`${resellerBaseRoute}accumulated-cashback`)
+          .set('Authorization', bearerToken);
+        expect(response.statusCode).to.eq(200);
+        expect(response.body).to.have.a.property('credit');
+      });
+    });
+    describe('Unauthorized reseller', () => {
+      it('get accumulated cashback without token should return 401', async () => {
         const response = await chai.request(app).get(`${resellerBaseRoute}profile`);
         expect(response.statusCode).to.eq(401);
       });
