@@ -12,6 +12,7 @@ jobs:
       - image: circleci/node:13.13.0
     steps:
       - checkout
+      - run: sudo npm install -g npm@latest'
       - node/with-cache:
           steps:
             - run: npm install
