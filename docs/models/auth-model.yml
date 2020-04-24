@@ -4,14 +4,3 @@
       jwt:
         type: "string"
     type: object
-  AuthInput:
-    properties:
-      email:
-        type: "string"
-        format: email
-        example: "claudio@example.com"
-      password:
-        type: "string"
-        minValue: 8
-        example: "123456789"
-    type: object

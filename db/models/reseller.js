@@ -1,6 +1,6 @@
 const ResellerDataTypes = require('./data-types/reseller-data-types');
 const ModelSettings = require('../config/model-settings');
-const { normalize } = require('../../api/helpers/format-helper');
+const { normalize } = require('../../api/helpers/format-helpers');
 const bcrypt = require('bcrypt');
 
 module.exports = (db) => {

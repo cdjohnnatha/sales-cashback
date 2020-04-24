@@ -8,12 +8,21 @@
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Get user token"
+      - in: "formData"
+        name: "email"
+        description: "Reseller email"
         required: true
-        schema:
-          $ref: "#/definitions/AuthInput"
+        type: string
+        format: email
+        example: "claudio@example.com"
+      - in: "formData"
+        name: "password"
+        description: "Reseller password"
+        required: true
+        type: string
+        minValue: 8
+        example: "123456789"
+        format: password
       responses:
         200:
           description: "successful operation"

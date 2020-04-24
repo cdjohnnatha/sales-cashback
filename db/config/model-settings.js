@@ -1,5 +1,5 @@
 module.exports = {
+  timestamps: true,
   underscored: true,
   paranoid: true,
-  timestamps: true,
 };

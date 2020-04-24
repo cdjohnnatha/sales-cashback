@@ -1,0 +1,40 @@
+  
+  OrderComission:
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      reseller_id:
+        type: "integer"
+        format: "int64"
+      order_statuses:
+        type: "string"
+      total_shopping_amount:
+        type: "number"
+      cashback_percentage_used:
+        type: "number"
+      cashback_amount:
+        type: "number"
+      shopping_code:
+        type: "string"
+      created_at:
+        type: "string"
+      updated_at:
+        type: "string"
+      deleted_at:
+        type: "string"
+    type: object
+  OrderComissionList:
+    properties:
+      order_comissions:
+        type: "array"
+        items:
+          $ref: "#/definitions/OrderComission"
+    type: object
+  OrderComissionInput:
+    properties:
+      shopping_code:
+        type: "string"
+      total_amount:
+        type: "string"
+    type: object

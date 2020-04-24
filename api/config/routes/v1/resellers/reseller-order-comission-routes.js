@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { createOrderComission } = require('../../../../controllers/v1/reseller-order-comissions-controller');
+const { createOrderComissionController, listOrderComissionController } = require('../../../../controllers/v1/reseller-order-comissions-controller');
 
-router.post('/', createOrderComission);
+router.post('/', createOrderComissionController);
+router.get('/', listOrderComissionController);
 
 module.exports = router;

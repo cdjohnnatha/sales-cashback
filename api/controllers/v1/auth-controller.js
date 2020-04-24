@@ -5,7 +5,7 @@ const logger = require('../../config/logger');
 const { generateJWT } = require('../../helpers/token-helpers');
 const { BAD_REQUEST } = houstonClientErrors;
 
-const authEmailProvider = async ({ body }, response) => {
+const authEmailProvider = async ({ body, ...props }, response) => {
   try {
     const isParamsValid = await authEmailSchema.validate(body);
     if (isParamsValid) {

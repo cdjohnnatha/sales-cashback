@@ -23,6 +23,9 @@ module.exports = {
     type: STRING(100),
     allowNull: false,
     unique: true,
+    validate: {
+      isEmail: true,
+    }
   },
   password: {
     type: STRING,
@@ -31,13 +34,19 @@ module.exports = {
   cpf: {
     allowNull: false,
     type: STRING(11),
-    unique: true
+    unique: true,
+    validate: {
+      min: 11,
+      max: 11,
+    }
   },
-  created_at: {
+  createdAt: {
     type: DATE,
+    field: 'created_at'
   },
-  updated_at: {
+  updatedAt: {
     type: DATE,
+    field: 'updated_at'
   },
   deleted_at: {
     allowNull: true,

@@ -31,12 +31,21 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Get user token"
+      - in: "formData"
+        name: "email"
+        description: "Reseller email"
         required: true
-        schema:
-          $ref: "#/definitions/AuthInput"
+        type: string
+        format: email
+        example: "claudio@example.com"
+      - in: "formData"
+        name: "password"
+        description: "Reseller password"
+        required: true
+        type: string
+        minValue: 8
+        example: "123456789"
+        format: password
       responses:
         200:
           description: "successful operation"
@@ -44,22 +53,48 @@ paths:
             $ref: "#/definitions/Token"
         404:
           description: "User not found"
-  /v1/products:
-    get:
+  /v1/resellers/order-comissions:
+    post:
       tags:
-      - "Products"
+      - "Order Comissions"
       security:
       - auth: []
-      summary: "Products elements"
-      description: "This for authenticate users to get a list of all products."
-      operationId: "getListOfProducts"
+      summary: "Create order comission"
+      operationId: "createOrderComission"
+      produces:
+      - "application/json"
+      parameters:
+        - name: shopping_code
+          in: formData
+          required: true
+          type: string
+          description: "Code from shopping receipt"
+        - name: total_shopping_amount
+          in: formData
+          required: true
+          type: number
+          description: "Amount spent on shopping"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/OrderComission"
+        400:
+          description: "Bad Request"
+    get:
+      tags:
+      - "Order Comissions"
+      security:
+      - auth: []
+      summary: "Get a list of order comission"
+      operationId: "listOrderComission"
       produces:
       - "application/json"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/ProductList"
+            $ref: "#/definitions/OrderComissionList"
         400:
           description: "Bad Request"
   /v1/resellers:
@@ -109,31 +144,25 @@ definitions:
       jwt:
         type: "string"
     type: object
-  AuthInput:
-    properties:
-      email:
-        type: "string"
-        format: email
-        example: "claudio@example.com"
-      password:
-        type: "string"
-        minValue: 8
-        example: "123456789"
-    type: object
   
-  Product:
+  OrderComission:
     properties:
       id:
         type: "integer"
         format: "int64"
-      name:
-        type: "string"
-      description:
-        type: "string"
-      qty_available:
+      reseller_id:
         type: "integer"
-      price:
+        format: "int64"
+      order_statuses:
+        type: "string"
+      total_shopping_amount:
         type: "number"
+      cashback_percentage_used:
+        type: "number"
+      cashback_amount:
+        type: "number"
+      shopping_code:
+        type: "string"
       created_at:
         type: "string"
       updated_at:
@@ -141,25 +170,20 @@ definitions:
       deleted_at:
         type: "string"
     type: object
-  ProductInput:
+  OrderComissionList:
     properties:
-      name:
-        type: "string"
-      description:
-        type: "string"
-      qty_available:
-        type: "integer"
-      price:
-        type: "number"
-    type: object
-  ProductList:
-    properties:
-      products:
+      order_comissions:
         type: "array"
         items:
-          $ref: "#/definitions/Products"
+          $ref: "#/definitions/OrderComission"
     type: object
-  
+  OrderComissionInput:
+    properties:
+      shopping_code:
+        type: "string"
+      total_amount:
+        type: "string"
+    type: object  
   Reseller:
     properties:
       id:
