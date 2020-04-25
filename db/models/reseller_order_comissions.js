@@ -1,5 +1,6 @@
 const ResellerOrderComissionsDataTypes = require('./data-types/reseller-order-comissions-data-types');
 const ModelSettings = require('../config/model-settings');
+const { normalize } = require('../../api/helpers/format-helpers');
 
 module.exports = (db) => {
   const ResellerOrderComissions = db.define(
@@ -17,6 +18,7 @@ module.exports = (db) => {
           } = models.ResellerOrderComissions.calculateCashback(dataValues.total_shopping_amount);
           dataValues.cashback_amount = cashback_amount;
           dataValues.cashback_percentage_used = cashback_percentage_used;
+          dataValues.shopping_code = normalize(dataValues.shopping_code);
           logger.systemLogLevel({
             meta: {
               function: 'ResellerOrderComissionModel - beforeCreate',

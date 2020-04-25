@@ -40,7 +40,9 @@ module.exports = (db) => {
     return false;
   };
 
-  Reseller.associate = () => {};
+  Reseller.associate = ({ Resellers, ResellerOrderComissions }) => {
+    Resellers.hasMany(ResellerOrderComissions, { foreignKey: 'reseller_id' });
+  };
 
   return Reseller;
 };

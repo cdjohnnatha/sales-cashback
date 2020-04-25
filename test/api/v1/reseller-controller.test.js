@@ -122,6 +122,7 @@ describe('Resellers-controller', () => {
         expect(response.body).to.have.a.property('credit');
       });
     });
+
     describe('Unauthorized reseller', () => {
       it('get accumulated cashback without token should return 401', async () => {
         const response = await chai.request(app).get(`${resellerBaseRoute}profile`);

@@ -9,12 +9,35 @@
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Created reseller object"
-        required: true
-        schema:
-          $ref: "#/definitions/ResellerInput"
+        - name: first_name
+          in: formData
+          required: true
+          type: string
+          description: "Reseller first name"
+        - name: last_name
+          in: formData
+          required: true
+          type: string
+          description: "Reseller last name"
+        - name: cpf
+          in: formData
+          required: true
+          type: string
+          minValue: 11
+          maxValue: 14
+          description: "Reseller CPF"
+        - name: email
+          in: formData
+          required: true
+          type: string
+          format: email
+          description: "Reseller email. It will be used as login."
+        - name: password
+          in: formData
+          required: true
+          type: string
+          format: password
+          description: "Reseller account password."
       responses:
         200:
           description: "successful operation"

@@ -41,22 +41,6 @@
       deleted_at:
         type: "string"
     type: object
-  ResellerInput:
-    properties:
-      first_name:
-        type: "string"
-      last_name:
-        type: "string"
-      cpf:
-        type: "string"
-        minValue: 11
-        maxValue: 14
-      email:
-        type: "string"
-        format: email
-      password:
-        type: "string"
-    type: object
   ResellerAccumulatedCashback:
     properties:
       credit:

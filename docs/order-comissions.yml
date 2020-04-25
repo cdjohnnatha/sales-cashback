@@ -35,6 +35,17 @@
       operationId: "listOrderComission"
       produces:
       - "application/json"
+      parameters:
+        - name: rowsPerPage
+          in: query
+          required: false
+          type: number
+          description: "Total of elements per a page"
+        - name: currentPage
+          in: query
+          required: false
+          type: number
+          description: "Current page."
       responses:
         200:
           description: "successful operation"

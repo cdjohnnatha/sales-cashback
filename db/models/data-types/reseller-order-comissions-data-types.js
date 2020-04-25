@@ -14,6 +14,7 @@ module.exports = {
   shopping_code: {
     allowNull: false,
     type: STRING,
+    unique: true,
   },
   total_shopping_amount: {
     type: DOUBLE,

@@ -14,6 +14,7 @@
     "database-drop": "./node_modules/sequelize-cli/lib/sequelize db:drop"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "bottleneck": "^2.19.5",
     "concat-files": "^0.1.1",

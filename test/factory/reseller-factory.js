@@ -12,13 +12,13 @@ const ResellerFactory = (factory) => {
   factory.define(
     'Resellers',
     Resellers,
-    {
-      first_name: () => name.firstName(),
-      last_name: () => name.lastName(),
-      cpf: () => random.number({ min: 10000000000, max: 99999999999 }).toString(),
-      email: () => internet.email(),
-      password: () => '123456789',
-    },
+      {
+        first_name: () => name.firstName(),
+        last_name: () => name.lastName(),
+        cpf: () => random.number({ min: 10000000000, max: 99999999999 }).toString(),
+        email: () => internet.email(),
+        password: () => '123456789',
+      },
     // hooks
   );
 };

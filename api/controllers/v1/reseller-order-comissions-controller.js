@@ -25,13 +25,13 @@ const createOrderComissionController = async ({ body, meta }, response) => {
   }
 };
 
-const listOrderComissionController = async ({ meta }, response) => {
+const listOrderComissionController = async ({ meta, query }, response) => {
   try {
-      const order_comissions = await orderComissionRepository.listOrderComissions({
+      const orderComissionResult = await orderComissionRepository.listOrderComissions({
         reseller_id: meta.reseller_id,
+        pagination: query,
       });
-      console.log('[order_comissions]', order_comissions);
-    response.status(201).send({ order_comissions });
+    response.status(200).send(orderComissionResult);
   } catch (error) {
     logger.systemLogLevel({
       error,
