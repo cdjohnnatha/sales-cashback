@@ -13,9 +13,10 @@
     2. [Makefile](#Makefile)
     3. [Docker](#Docker)
 4. [Usage](#Usage)
-5. [Swagger](#Swagger)
-6. [Tests](#Tests)
-7. [License](#License)
+5. [Database](#Database)
+6. [Swagger](#Swagger)
+7. [Tests](#Tests)
+8. [License](#License)
 
 
 ## 1. <a name='Intro'></a>Intro
@@ -80,10 +81,21 @@ All this cases are related to a total amount from a period of time.
     docker-compose up
 ```
 
-## 4. 📖 <a name='Usage'></a>Usage
+## 5. 📖 <a name='Database'></a>Database
+
+The database used is PostgreSQL and it was used an ORM called sequelize.js to integrate Node.js with PostgreSQL.
 
 
-## 5. 📄 <a name='Swagger'></a>Swagger
+The database initialization it will pretty much create the database, run the migrations and run all seeds:
+
+### 5.1 Node
+
+```
+  npm run build-database
+```
+
+
+## 6. 📄 <a name='Swagger'></a>Swagger
 
 All the endpoints has a documentation by swagger which can also be used as an test interface.
 
@@ -93,7 +105,7 @@ All the endpoints has a documentation by swagger which can also be used as an te
 
 To Use Swagger-ui you has to follow the stepps bellow:
 
-### 5.1 Build swagger
+### 6.1 Build swagger
 
 It has the commands at a Makefile which runs a container with the Swagger-Ui image at **localhost:8085**.
 
@@ -101,7 +113,7 @@ It has the commands at a Makefile which runs a container with the Swagger-Ui ima
   make swaggerui
 ```
 
-### 5.2 Generate swagger.json
+### 6.2 Generate swagger.json
 
 The **swagger.json** is used as a documentation file which it is splited at docs folder. To create this file just run:
 
@@ -109,14 +121,14 @@ The **swagger.json** is used as a documentation file which it is splited at docs
   npm run swagger-json
 ```
 
-### 5.3 Demo
+### 6.3 Demo
 
 If everything goes fine you can access **localhost:8085**
 
 ![picture](public/images/swagger.png)
 
 
-## 5. 📄 <a name='Tests'></a>Tests
+## 7. 📄 <a name='Tests'></a>Tests
 
 You can run the applications tests with
 
@@ -124,5 +136,5 @@ You can run the applications tests with
   npm test
 ```
 
-## 6. 📄 <a name='License'></a>License
+## 8. 📄 <a name='License'></a>License
 Simple Object Handler is [MIT licensed](./LICENSE).

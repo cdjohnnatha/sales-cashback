@@ -69,7 +69,7 @@ logger.systemLogLevel = async ({ error = null, meta = {}, level = 'debug', messa
       message = error.message;
     }
 
-    // if (process.env.NODE_ENV !== 'test') {
+    if (process.env.LOGGER_ON_TESTS) {
       bottleneck.schedule({}, () =>
         Promise.resolve().then(() => {
           logger[level]({
@@ -78,7 +78,7 @@ logger.systemLogLevel = async ({ error = null, meta = {}, level = 'debug', messa
           });
         })
       );
-    // }
+    }
   } catch (error) {
     bottleneck.schedule({}, () =>
       Promise.resolve().then(() => {
