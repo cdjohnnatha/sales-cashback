@@ -20,7 +20,6 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run database-migration
-      - run: npm run coverage
       - run: npm test
       # - run: npm run database-drop
 workflows:
