@@ -27,7 +27,7 @@ This project is also integrated with Circle/ci so it will be applied few rules b
 
 ### 1.2. Database architecture
 
-![picture](public/images/BdGrupoBoticario.png)
+![picture](public/images/BdGrupoBoticario.jpg)
 
 ## 2. <a name='Challenge'></a>Challenge
 
