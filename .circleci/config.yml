@@ -21,7 +21,6 @@ jobs:
       - run: npm install
       - run: npm run database-migration
       - run: npm test
-      # - run: npm run database-drop
 workflows:
   TestBuildWorkflow:
     jobs:
